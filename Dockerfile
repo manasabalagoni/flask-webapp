@@ -1,9 +1,9 @@
-FROM python:3.10
+FROM python:3-alpine3.15
 
-WORKDIR /desktop
-COPY ./sample.py /desktop
-COPY ./Dockerfile /desktop
-COPY ./requirements.txt /desktop
+WORKDIR /app
+COPY ./sample.py /app
+COPY ./Dockerfile /app
+COPY ./requirements.txt /app
 
 RUN pip3 install -r requirements.txt
 EXPOSE 7000
