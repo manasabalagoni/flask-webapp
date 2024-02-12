@@ -2,7 +2,7 @@ name: PythonFlask Docker Build and Push
 
 #on: [push] # When pushing to any branch then run this action
 #on:
-#  workflow_dispatch:  # Manually triggered event
+##  workflow_dispatch:  # Manually triggered event
 on:
   push:
     branches:
