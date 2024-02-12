@@ -23,4 +23,4 @@ jobs:
         with:
           #context: .
           #file: ./Dockerfile
-          tags:  manasa/flask:1.0
+          tags:  9959574446/gitaction-java/flask:1.0
