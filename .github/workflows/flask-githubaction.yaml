@@ -25,4 +25,4 @@ jobs:
           #file: ./Dockerfile
           push: true
           tags: |
-            9959574446/gitaction-java/flask:1.0
+            9959574446/pythonflask-app/flask:1.0
