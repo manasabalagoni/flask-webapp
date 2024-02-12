@@ -1,7 +1,6 @@
-FROM python:3-alpine3.15
+FROM python:3.9-slim-buster
 WORKDIR /app
 COPY ./sample.py /app
-COPY ./Dockerfile /app
 COPY ./requirements.txt /app
 RUN pip3 install -r requirements.txt
 EXPOSE 7000
