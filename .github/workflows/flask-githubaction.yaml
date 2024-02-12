@@ -22,4 +22,5 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.REPO_NAME }}/flask:1.0
+          #tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.REPO_NAME }}/flask:1.0
+          tags: manasabalagoni1@gmai.com/abcdef}/flask:1.0
