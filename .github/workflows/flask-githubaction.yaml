@@ -23,4 +23,6 @@ jobs:
         with:
           #context: .
           #file: ./Dockerfile
-          tags:  9959574446/gitaction-java/flask:1.0
+          push: true
+          tags: |
+            9959574446/gitaction-java/flask:1.0
