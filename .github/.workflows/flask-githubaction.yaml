@@ -1,0 +1,24 @@
+name: PythonFlask Docker Build and Push
+
+#on: [push] # When pushing to any branch then run this action
+#on:
+#  workflow_dispatch:  # Manually triggered event
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  flask-image-to-docker-hub:
+    runs-on: ubuntu-latest
+    steps:
+      - name: docker login
+        uses: actions/checkout@v2
+        run: | 
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.REPO_NAME }}:01.latest
