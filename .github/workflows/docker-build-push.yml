@@ -1,0 +1,23 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+   flask-image-to-docker-hub:
+     runs-on: ubuntu-latest
+     steps:
+       - name: docker login
+         uses: actions/checkout@v1
+         with:
+           username: ${{ secrets.DOCKERHUB_USERNAME }}
+           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+
+       - name: Build and push Docker image
+         uses: docker/build-push-action@v4
+         with:
+           context: .
+           file: ./Dockerfile
+           push: true
+           tags: |
+             pythonflask-app/flask:1.0
