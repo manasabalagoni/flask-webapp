@@ -6,10 +6,10 @@ on:
       - main
 
 jobs:
-   flask-image-to-docker-hub:
-     runs-on: ubuntu-latest
+  flask-to-docker-hub:
+    runs-on: ubuntu-latest
      
-     steps:
+    steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -20,7 +20,3 @@ jobs:
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/gitpythonflask-app .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/gitpythonflask-app:latest0
 
-       - name: Build and push Docker image
-         run: |
-           docker build -t pythonflask-app .
-           docker push ${{ secrets.DOCKERHUB_USERNAME }}/pythonflask-app:latest0
