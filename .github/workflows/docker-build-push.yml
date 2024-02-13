@@ -22,4 +22,4 @@ jobs:
            file: ./Dockerfile
            push: true
            tags: |
-             pythonflask-app:1.0
+             ${{ secrets.DOCKERHUB_USERNAME }}/pythonflask-app:1.0
