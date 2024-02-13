@@ -17,6 +17,6 @@ jobs:
 
        - name: Build and push Docker image
          run: |
-           docker build -t gitpythonflask-app .
-           docker tag gitpythonflask-app ${{ secrets.DOCKERHUB_USERNAME }}/gitpythonflask-app:latest0
-           docker push ${{ secrets.DOCKERHUB_USERNAME }}/gitpythonflask-app:latest0
+           docker build -t pythonflask-app .
+           docker tag pythonflask-app ${{ secrets.DOCKERHUB_USERNAME }}/pythonflask-app:latest0
+           docker push ${{ secrets.DOCKERHUB_USERNAME }}/pythonflask-app:latest0
