@@ -24,4 +24,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: 9959574446/python-flask-app:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/python-flask-app:latest09
