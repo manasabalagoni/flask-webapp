@@ -1,28 +1,27 @@
-# name: PythonFlask Docker Build and Push
+name: PythonFlask Docker Build and Push
 
-# #on: [push] # When pushing to any branch then run this action
-# #on:
-# ##  workflow_dispatch:  # Manually triggered event
-# on:
-#   push:
-#     branches:
-#       - main
+#on: [push] # When pushing to any branch then run this action
+#on:
+##  workflow_dispatch:  # Manually triggered event
+on:
+  push:
+    branches:
+      - main
 
-# jobs:
-#   flask-image-to-docker-hub:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: docker login
-#         uses: actions/checkout@v1
-#         with:
-#           username: ${{ secrets.DOCKERHUB_USERNAME }}
-#           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+jobs:
+  flask-image-to-docker-hub:
+    runs-on: ubuntu-latest
+    steps:
+      - name: docker login
+        uses: actions/checkout@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
-#       - name: Build and push Docker image
-#         uses: docker/build-push-action@v4
-#         with:
-#           #context: .
-#           #file: ./Dockerfile
-#           push: true
-#           tags: |
-#             pythonflask-app/flask:1.0
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/python-flask-app:latest
