@@ -36,5 +36,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/gitpythonflaskapp::${{ steps.set-tag.outputs.TAG_NUMBER }}
+          tags: ${{ steps.set-tag.outputs.TAG_NUMBER }}
           #${{ github.run_number }}
