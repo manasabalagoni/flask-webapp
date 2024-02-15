@@ -28,7 +28,7 @@ jobs:
 
       - name: Set Tag Number
         id: set-tag
-        run: echo "::set-output name=TAG_NUMBER::$(Build.BuildNumber)"
+        run: echo "::set-output name=TAG_NUMBER::${{ github.run_number }}"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -36,5 +36,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.set-tag.outputs.TAG_NUMBER }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/gitpythonflaskapp:${{ steps.set-tag.outputs.TAG_NUMBER }}
           #${{ github.run_number }}
