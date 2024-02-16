@@ -1,6 +1,6 @@
 name: PythonFlask Docker Build and Push
 
-##on: [push] # When pushing to any branch then run this action
+###on: [push] # When pushing to any branch then run this action
 
 on:
   push:
