@@ -26,12 +26,12 @@ jobs:
       - name: Set Tag Number
         id: set-tag
         run: |
-          if {
+          if 
            [[ ${{ github.event_name }} == 'push' ]]; then
             echo "::set-output name=TAG_NUMBER::${{ github.run_number }}"; 
           else 
             echo "::set-output name=TAG_NUMBER::${{ github.run_number }}-dev";
-          }
+          fi
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
