@@ -1,12 +1,12 @@
 name: PythonFlask Docker Build and Push
 
 #on: [push] # When pushing to any branch then run this action
-#on:
-##  workflow_dispatch:  # Manually triggered event
+
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   flask-image-to-docker-hub:
@@ -25,7 +25,7 @@ jobs:
 
       - name: Set Tag Number
         id: set-tag
-        run: echo "::set-output name=TAG_NUMBER::${{ github.run_number }}"
+        run: echo "::set-output name=TAG_NUMBER::${{ github.run_number }}-dev"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
