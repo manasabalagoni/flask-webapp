@@ -7,6 +7,12 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      push_value:
+        description: 'whether to Push Docker image to Docker Hub'
+        type: boolean
+        required: true
+        default: false
 
 jobs:
   flask-image-to-docker-hub:
@@ -26,11 +32,12 @@ jobs:
       - name: Set Tag Number
         id: set-tag
         run: |
-          if 
-           [[ ${{ github.event_name }} == 'push' ]]; then
+          if [[ "${{ github.event_name }}" == 'workflow_dispatch' && "${{ github.event.inputs.push_image }}" == 'true' ]]; then
+            echo "::set-output name=TAG_NUMBER::${{ github.run_number }}-dev";
+          elif [[ "${{ github.event_name }}" == 'push' ]]; then
             echo "::set-output name=TAG_NUMBER::${{ github.run_number }}"; 
           else 
-            echo "::set-output name=TAG_NUMBER::${{ github.run_number }}-dev";
+            echo "::set-output name=image is cannot be pushed to docker Hub";
           fi
 
       - name: Build and push Docker image
