@@ -32,7 +32,7 @@ jobs:
       - name: Set Tag Number
         id: set-tag
         run: |
-          if [[ "${{ github.event_name }}" == 'workflow_dispatch' && "${{ github.event.inputs.push_image }}" == 'true' ]]; then
+          if [[ "${{ github.event_name }}" == 'workflow_dispatch' && "${{ github.event.inputs.push_value }}" == 'true' ]]; then
             echo "::set-output name=TAG_NUMBER::${{ github.run_number }}-dev";
           elif [[ "${{ github.event_name }}" == 'push' ]]; then
             echo "::set-output name=TAG_NUMBER::${{ github.run_number }}"; 
