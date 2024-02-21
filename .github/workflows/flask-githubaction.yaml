@@ -44,7 +44,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          #push: ${{ steps.set-tag-push.outputs.image}}
-          push: ${{ github.event.inputs.push_value == 'true' }} 
+          push: true
+          #push: ${{ github.event.inputs.push_value == 'true' }} 
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.REPO_NAME }}:${{ steps.set-tag.outputs.TAG_NUMBER }}
           #${{ github.run_number }}
