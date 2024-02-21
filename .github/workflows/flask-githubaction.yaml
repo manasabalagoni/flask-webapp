@@ -35,7 +35,7 @@ jobs:
           if [[ "${{ github.event_name }}" == 'workflow_dispatch' && ( "${{ github.event.inputs.push_value }}" == 'true' || "${{ github.event.inputs.push_value }}" == 'false' ) ]]; then
             echo "::set-output name=TAG_NUMBER::${{ github.run_number }}-dev";
           elif [[ "${{ github.event_name }}" == 'push' ]]; then
-            echo "::set-output name=image::${{ github.event.inputs.push_value }}";
+            echo "::set-output name=image::${{ github.event.inputs.push_value == 'true' }}";
             echo "::set-output name=TAG_NUMBER::${{ github.run_number }}"; 
           else 
             echo "::set-output name=TAG_NUMBER:: image is cannot be pushed to docker Hub";
