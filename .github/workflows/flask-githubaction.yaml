@@ -47,11 +47,11 @@ jobs:
           fi
 
       - name: Build and push Docker image
+        if: steps.set-tag-push.outputs.booleanvalue == 'true'
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
-          if: steps.set-tag-push.outputs.booleanvalue == 'true'
           push: ${{ steps.set-tag-push.outputs.booleanvalue }}
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.REPO_NAME }}:${{ steps.set-tag-push.outputs.TAG_NUMBER }}
           #${{ github.run_number }}
