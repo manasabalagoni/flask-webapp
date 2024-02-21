@@ -13,11 +13,6 @@ on:
         type: boolean
         required: true
         default: false
-      # booleanvalue:
-      #   description: 'assigned for false'
-      #   type: boolean
-      #   required: false
-      #   default: false
 
 jobs:
   flask-image-to-docker-hub:
@@ -34,25 +29,21 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Set Tag Number and push
-        id: set-tag-push
+      - name: Set Tag Number
+        id: set-tag
         run: |
-          if [[ "${{ github.event_name }}" == 'workflow_dispatch' && ( "${{ github.event.inputs.push_value }}" == 'true' || "${{ github.event.inputs.push_value }}" == 'false' ) ]]; then
-            echo "::set-output name=booleanvalue::${{ github.event.inputs.push_value }}";
+          if [[ "${{ github.event_name }}" == 'workflow_dispatch' && (${‌{ github.event.inputs.push_value }} == 'true' || ${‌{ github.event.inputs.push_value }} == 'false') ]]; then
             echo "::set-output name=TAG_NUMBER::${{ github.run_number }}-dev";
           elif [[ "${{ github.event_name }}" == 'push' ]]; then
-            echo "::set-output name=booleanvalue::${{ github.event.inputs.push_value }}";
             echo "::set-output name=TAG_NUMBER::${{ github.run_number }}"; 
           else 
             echo "::set-output name=TAG_NUMBER:: image is cannot be pushed to docker Hub";
           fi
-
       - name: Build and push Docker image
-        if: steps.set-tag-push.outputs.booleanvalue == 'true'
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
-          push: ${{ steps.set-tag-push.outputs.booleanvalue }}
-          tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.REPO_NAME }}:${{ steps.set-tag-push.outputs.TAG_NUMBER }}
+          push: ${{ github.event.inputs.push_value }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.REPO_NAME }}:${{ steps.set-tag.outputs.TAG_NUMBER }}
           #${{ github.run_number }}
