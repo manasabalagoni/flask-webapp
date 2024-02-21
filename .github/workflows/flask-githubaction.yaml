@@ -37,7 +37,7 @@ jobs:
       - name: Set Tag Number and push
         id: set-tag-push
         run: |
-          if [[ "${{ github.event_name }}" == 'workflow_dispatch' && "${{ github.event.inputs.push_value }}" == 'true' || "${{ github.event.inputs.push_value }}" == 'false' ) ]]; then
+          if [[ "${{ github.event_name }}" == 'workflow_dispatch' && ( "${{ github.event.inputs.push_value }}" == 'true' || "${{ github.event.inputs.push_value }}" == 'false' ) ]]; then
             echo "::set-output name=booleanvalue::${{ github.event.inputs.push_value }}";
             echo "::set-output name=TAG_NUMBER::${{ github.run_number }}-dev";
           elif [[ "${{ github.event_name }}" == 'push' ]]; then
