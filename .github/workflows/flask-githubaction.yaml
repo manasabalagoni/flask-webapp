@@ -38,18 +38,16 @@ jobs:
         id: set-tag
         run: |
           if [[ "${{ github.event_name }}" == 'workflow_dispatch' ]]; then
-
             if [[ "${{ github.event.inputs.push_value }}" == 'true' ]]; then
-              echo "::set-output name=TAG_NUMBER::${{ github.run_number }}-dev";
-              push_needed ='true' 
+              echo "::set-output name=TAG_NUMBER::${{ github.run_number }}-dev"
+              echo "::set-output name=PUSH_NEEDED::true"
             else
-              echo "::set-output name=TAG_NUMBER::${{ github.run_number }}-dev";
-              push_needed = 'false' 
+              echo "::set-output name=TAG_NUMBER::${{ github.run_number }}-dev"
+              echo "::set-output name=PUSH_NEEDED::false"
             fi
           elif [[ "${{ github.event_name }}" == 'push' ]]; then
-            push_needed ='true'  # For non-workflow dispatch events, always push
             echo "::set-output name=TAG_NUMBER::${{ github.run_number }}"; 
-            echo "::set-output name=PUSH_NEEDED::${push_needed}}"
+            echo "::set-output name=PUSH_NEEDED::true"
           else 
             echo "::set-output name=TAG_NUMBER:: image is cannot be pushed to docker Hub";
           fi
