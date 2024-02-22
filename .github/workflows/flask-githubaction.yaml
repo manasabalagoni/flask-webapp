@@ -32,17 +32,17 @@ jobs:
       - name: Set Tag Number
         id: set-tag
         run: |
-          push_needed == 'false'  # Initialize push_needed to false
           if [[ "${{ github.event_name }}" == 'workflow_dispatch' ]]; then
 
             if [[ "${{ github.event.inputs.push_value }}" == 'true' ]]; then
               echo "::set-output name=TAG_NUMBER::${{ github.run_number }}-dev";
-              push_needed=true  
+              push_needed ='true' 
             else
               echo "::set-output name=TAG_NUMBER::${{ github.run_number }}-dev";
+              push_needed = 'false' 
             fi
           elif [[ "${{ github.event_name }}" == 'push' ]]; then
-            push_needed=true  # For non-workflow dispatch events, always push
+            push_needed ='true'  # For non-workflow dispatch events, always push
             echo "::set-output name=TAG_NUMBER::${{ github.run_number }}"; 
             echo "::set-output name=PUSH_NEEDED::${push_needed}}"
           else 
