@@ -13,6 +13,11 @@ on:
         type: boolean
         required: true
         default: false
+      push_needed:
+        description: 'True or False'
+        type: boolean
+        required: false
+        default: false
 
 jobs:
   flask-image-to-docker-hub:
