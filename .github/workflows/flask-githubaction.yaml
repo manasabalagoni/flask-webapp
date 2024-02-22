@@ -32,7 +32,7 @@ jobs:
       - name: Set Tag Number
         id: set-tag
         run: |
-          push_value=false  # Initialize push_needed to false
+          push_value == 'false'  # Initialize push_needed to false
           if [[ "${{ github.event_name }}" == 'workflow_dispatch' ]]; then
 
             if [[ "${{ github.event.inputs.push_value }}" == 'true' ]]; then
@@ -46,7 +46,7 @@ jobs:
             echo "::set-output name=TAG_NUMBER:: image is cannot be pushed to docker Hub";
           fi
       - name: Build and push Docker image
-        if: ${{ github.event.inputs.push_value == 'true' }}
+        if: push_value == 'true'
         uses: docker/build-push-action@v5
         with:
           context: .
