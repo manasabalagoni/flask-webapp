@@ -52,7 +52,7 @@ jobs:
             echo "::set-output name=TAG_NUMBER:: image is cannot be pushed to docker Hub";
           fi
       - name: Build and push Docker image
-        if: steps.set-tag.outputs.PUSH_NEEDED == 'true'
+        if: steps.set-tag.outputs.PUSH_NEEDED == true
         uses: docker/build-push-action@v5
         with:
           context: .
